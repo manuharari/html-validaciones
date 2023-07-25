@@ -170,5 +170,6 @@ A subir tu proyecto a producción.
 LINK VALIDACIONES HTML5:
 https://www.aluracursos.com/blog/formulario-con-form-validation-de-html5
 
-
+LINK COMO ORGANIZAR JAVASCRIPT:
+https://www.aluracursos.com/blog/organiza-tu-codigo-javascript-de-una-manera-facil
 
