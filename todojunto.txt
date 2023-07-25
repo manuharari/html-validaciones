@@ -167,6 +167,8 @@ Lo que aprendimos en esta aula:
 
 A subir tu proyecto a producción.
 
+LINK VALIDACIONES HTML5:
+https://www.aluracursos.com/blog/formulario-con-form-validation-de-html5
 
 
 
