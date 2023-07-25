@@ -1,0 +1,166 @@
+1.1 Validacion con HTML - Atributos de Validacion.
+
+Regularment en los codigos de formularios requerimos ciertos campos para rellenar, para no dejar avanzar en esos campos, existe la instruccion required:
+
+     <input name="name" id="name" class="input" type="text" placeholder="Nombre" required>
+
+Tambien podemos darles type, esto para que tenga los caracteres que necesitamos, como email o telefono que no nos dejara avanzar si los caracteres no son los regulares para ese campo, en el caso de email necesita caracteres, seguido de arroba seguido de caracteres y luego el tipo de dominio, eso lo sabe el navegador cuando damos type email al campo:
+
+    <input name="email" id="email" class="input" type="email" placeholder="Email" required>
+
+Para la contraseña ponemos type password y esto lograra que no se vea como tal, por eso salen puntos y no caracteres, pero tambien podemos poner un minimo y maximo de caracteres en el area, asi como si es necesario minusculas y mayusculas:
+
+    <input name="password" id="password" class="input" type="password" placeholder="Contraseña" required minlength="6" maxlength="12">
+
+Aqui estamos validando campos por tipo y dando parametros en los tipos.
+
+Lo que aprendimos en esta aula:
+
+Hacer validación en el propio HTML utilizando los atributos required y type.
+Utilizar reglas del regex dentro del atributo pattern para validar el campo de contraseña.
+Mandar un mensaje customizado de error en el navegador.
+
+MAS SOBRE REGEX:
+
+Existen diversas reglas para la escritura de una regex. Por eso, el entendimiento de cada una de ellas exige mucha atención. Una herramienta que recomiendo bastante para entrenar la escrita de regex es la página https://regexr.com/. Esta página nos regala una tabla con ejemplos, un cheatsheet con algunas reglas y también un validador explicando todo lo que está pasando durante la escritura.
+
+Les comento que tengo un curso aquí en Alura Latam sobre las regex, les dejo el link aquí en el caso de que no lo hayan visto.
+
+Una sugerencia es buscar ejemplos de regex en internet y pegarlos en ese validador para ver las explicaciones. Tenemos que recordar que una regex puede estar formada por diversas reglas, entender partes de la escritura de algunas de estas expresiones puede facilitar el entendimiento en la hora de escribir tus propias reglas.
+
+ENTRENAMIENTO REGEX: https://regexr.com/
+CURSO REGEX: https://app.aluracursos.com/course/regex-expresiones-regulares
+
+2.1 Validacion de contraseña.
+
+Con regex podemos poner en una sola linea todas las condicionales para una contraseña como longitud, que caracteres si, que caracteres no, etc. y esto lo definimos de la siguiente manera:
+
+    ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,12}$
+
+?= significa que si aceptamos
+?! significa que no aceptamos
+.6-12 es la cantidad minima y maxima de caracteres
+
+LINKS REGEX:
+
+https://regexlib.com/
+https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+
+
+Lo que aprendimos en esta aula:
+
+Crear funciones para validaciones del formulario.
+Definir mensajes customizados para validaciones fuera del HTML.
+Utilizar data attributes para trabajar con JavaScript.
+Dejar la función de validación más genérica para funcionar con cualquier input.
+
+
+3.1 Validacion de fechas
+
+Para definir la fecha de nacimiento, ponemos un formato en nuestro codigo, en elarea quew asignamos para fecha de nacimiento un type date>
+
+    <input name="birth" id="birth" class="input" type="date" placeholder="Fecha de nacimento">
+
+Asi el formato cambiara y sera el adecuado.
+
+Pero que pasa si tenemos reglas muy especificas de rango de edad para llenar el formulario? podemos hacerlo con javascript ya que con pattern no nos da para hacerlo tan especifico:
+
+
+
+Con esto logramos que despues de salir del campo, el programa revise si es la edad adecuada.
+
+Pero esta practica hecha de esta ,amera, no es tan adecuada: 
+
+    const inputNacimiento = document.querySelector("#birth");
+
+Que un querySelector vaya directo a un ID no es la practica adecuada, y tambien queremos que el addEventListener sea reutilizable. Veamos como mejorarlo.
+
+Para esto en nuestro campo de fecha en HTML, agregamos un required field que sera el de la fecha de nacimiento, posteriormente vamos a nuestro JavaScript para crear una funcion para validar la fecha:
+
+HTML:
+
+         <input name="birth" id="birth" class="input" type="date" placeholder="Fecha de nacimento" required data-tipo="'nacimiento">
+
+JS:
+
+        export function validar(input) {
+            const tipoDeInput = input.dataset.tipo
+            if(validadores[tipoDeInput]){
+                validadores[tipoDeInput](input)
+            }
+        }
+
+        const validadores = {
+            nacimiento: input => validarNacimiento(inpuy),
+        };
+
+
+app.js:
+
+        import { validar } from "./validaciones.js";
+
+        const inputs = document.querySelectorAll("input");
+
+        inputs.forEach( input => {
+            input.addEventListener('blur', (input) => {
+                validar(input.target)
+            })
+        })
+
+Lo que pasara es que el html recipe el input, nosotros en el codigo de app.js le agregaremos el event listener, y posterior ira a verificar la informacion de la fecha en este caso, lo vlidara en el de validaciones. Pero este codigo nos servira para verificar mucho mas que solo nacimiento.
+
+Lo que aprendimos en esta aula:
+
+A validar fechas en nuestro formulario.
+A utilizar expresiones regulares para mejorar la validación de nuestro formulario.
+
+4.1 Mensajes customizados - Live server y Browser Sync.
+
+Son aplicaciones que nos dejan probar nuestro codigo completo con html y js dentro de nuestro browser de manera local.
+
+https://browsersync.io/
+https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+
+4.2 Mostrando mensajes de error.
+
+Cuando existe algún error de validación en el formulario aparecerá un mensaje arriba del campo explicando o dando algún tip para corregirlo. Pero en el proyecto existe una estilización y una tag <span> para enseñar un mensaje de error directo en el HTML.
+
+Eso se puede lograr tambien con JS:
+
+
+
+
+
+Lo que aprendimos en esta aula:
+
+A instalar y utilizar el plugin Liveserver.
+Como descargar y correr el Browser-Sync.
+Como enseñar el mensaje de error directamente en el HTML.
+Como customizar los mensajes de error de validación.
+
+5.1 Completando el formulario
+
+Ahora seguiremos dandole forma, danodle la limitante y el requerimiento a los campos dependiendo del tipo, en telefono haria logica utiliar nombre, pero como utilizamos max length para limitar la cantidad de caracteres, y eso solo se usa en texto, dejamos el type en tex, seguido de un required para que sea forzoso y y un pattern y maxlength.
+
+        <input name="phoneNumber" id="phoneNumber" class="input" type="text" placeholder="Número telefónico" pattern="\s{10}" required maxlength="10">
+
+Posteriormente agregamos un mensaje de error como en los demas campos con ayuda de JS, y, a pesar de que el campo nos permite poner letras porque es de texto, la funcion de validar que creamos previamente lo revisa y no permite este tipo de caracteres en el campo y nos envia una alerta, ya que indicamos en HTML que el patron era de 10 numeros.
+
+Eso mismo lo hacemos con los campos que necesitemos sean obligatorios.
+
+Lo que aprendimos en esta aula:
+
+Como validar formularios.
+
+
+6.1 Tu proyecto en linea
+
+Vercel: https://vercel.com/
+Github Pages: https://pages.github.com/
+
+Github pages: Con el boton de fork en Github pages podemos clonar algun repositorio a nuestra pagina
+
+
+
+
+
