@@ -159,7 +159,13 @@ Vercel: https://vercel.com/
 Github Pages: https://pages.github.com/
 
 Github pages: Con el boton de fork en Github pages podemos clonar algun repositorio a nuestra pagina
+y tambien podemos publicar nuestros proyectos ya sea subiendo la carpeta con el explorador o con comandos en bash.
 
+Vercel: Como algunas plataformas, incluida github, nos ayuda a publicar repositorios y proyectos para tener una experiencia real y online con el, Vercel nos deja publicarlo desde nuestro repo en github.
+
+Lo que aprendimos en esta aula:
+
+A subir tu proyecto a producción.
 
 
 
